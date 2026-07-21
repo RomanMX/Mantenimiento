@@ -192,6 +192,28 @@ export function getUltimasEntradas(limit = 5): UltimaEntrada[] {
     .slice(0, limit);
 }
 
+export function fechaCorteUltimos12Meses(): string {
+  const haceUnAnio = new Date();
+  haceUnAnio.setFullYear(haceUnAnio.getFullYear() - 1);
+  return haceUnAnio.toISOString().slice(0, 10);
+}
+
+export interface CostoPorGrupo {
+  grupo: Grupo;
+  costoUltimos12Meses: number;
+}
+
+export function getCostoPorGrupoUltimos12Meses(): CostoPorGrupo[] {
+  const fechaCorte = fechaCorteUltimos12Meses();
+  return grupos.map((grupo) => ({
+    grupo,
+    costoUltimos12Meses: getElementosPorGrupo(grupo.id)
+      .flatMap((elemento) => elemento.bitacora)
+      .filter((entrada) => entrada.fecha >= fechaCorte)
+      .reduce((total, entrada) => total + entrada.costo, 0),
+  }));
+}
+
 export function buscarElementos(query: string): Elemento[] {
   const q = query.trim().toLowerCase();
   if (!q) return elementos;

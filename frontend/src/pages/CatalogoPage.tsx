@@ -85,7 +85,7 @@ export function CatalogoPage() {
               </h3>
             </button>
             {abierto && (
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "var(--space-2)" }}>
+              <div className="grid-2">
                 {elementos.map((elemento) => (
                   <ElementCard key={elemento.id} elemento={elemento} />
                 ))}

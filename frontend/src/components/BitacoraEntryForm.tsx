@@ -41,7 +41,7 @@ export function BitacoraEntryForm({ onSubmit, initial, submitLabel = "Registrar 
 
   return (
     <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
-      <div style={{ display: "grid", gridTemplateColumns: "2fr 2fr 1fr", gap: "var(--space-2)" }}>
+      <div className="entry-form-grid">
         <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
           <span style={{ position: "absolute", left: 10, pointerEvents: "none" }}>
             <ActividadIcon tipo={actividad} />

@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import { getElementosEnRojo, getUltimasEntradas } from "../data/mockData";
+import { getElementosEnRojo, getUltimasEntradas, getCostoPorGrupoUltimos12Meses } from "../data/mockData";
 import { ElementCard } from "../components/ElementCard";
 import { ActividadIcon } from "../components/ActividadIcon";
 
 export function DashboardPage() {
   const enRojo = getElementosEnRojo();
   const ultimasEntradas = getUltimasEntradas();
+  const costoPorGrupo = getCostoPorGrupoUltimos12Meses();
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-6)" }}>
@@ -16,12 +17,28 @@ export function DashboardPage() {
         {enRojo.length === 0 ? (
           <p style={{ color: "var(--color-text-secondary)" }}>No hay elementos en estatus ROJO.</p>
         ) : (
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "var(--space-2)" }}>
+          <div className="grid-2">
             {enRojo.map((elemento) => (
               <ElementCard key={elemento.id} elemento={elemento} />
             ))}
           </div>
         )}
+      </section>
+
+      <section>
+        <h2 style={{ fontSize: "var(--text-subhead-size)", marginBottom: "var(--space-3)" }}>
+          Costo por grupo (últimos 12 meses)
+        </h2>
+        <div className="grid-2">
+          {costoPorGrupo.map(({ grupo, costoUltimos12Meses }) => (
+            <div key={grupo.id} className="card">
+              <div style={{ fontSize: "var(--text-caption-size)", color: "var(--color-text-secondary)" }}>{grupo.nombre}</div>
+              <div style={{ fontFamily: "var(--font-headline)", fontWeight: 700, fontSize: "var(--text-headline-size)" }}>
+                ${costoUltimos12Meses.toLocaleString("es-MX")}
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section>

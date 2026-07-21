@@ -12,6 +12,7 @@ body,
 
 body {
   margin: 0;
+  overflow-x: hidden;
   background: var(--color-background);
   color: var(--color-text-primary);
   font-family: var(--font-body);
@@ -85,11 +86,14 @@ a {
 
 /* Cards */
 .card {
+  width: 100%;
+  min-width: 0;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-3);
   box-shadow: var(--shadow-subtle);
+  overflow-wrap: break-word;
 }
 
 /* Chips */
@@ -127,4 +131,58 @@ a {
   min-height: 72px;
   padding: var(--space-2) var(--space-3);
   resize: vertical;
+}
+
+/* Layout helpers */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.app-header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.app-main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--space-4);
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2);
+}
+
+.entry-form-grid {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  gap: var(--space-2);
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .app-main {
+    padding: var(--space-3);
+  }
+
+  .grid-2,
+  .entry-form-grid {
+    grid-template-columns: 1fr;
+  }
 }

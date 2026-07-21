@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getElementoById, getGrupoNombre } from "../data/mockData";
+import { getElementoById, getGrupoNombre, fechaCorteUltimos12Meses } from "../data/mockData";
 import type { BitacoraEntry, EstatusSemaforo } from "../types";
 import { SemaforoBadge } from "../components/SemaforoBadge";
 import { BitacoraList } from "../components/BitacoraList";
@@ -41,18 +41,38 @@ export function ElementoDetailPage() {
 
   const costoTotal = bitacora.reduce((total, entrada) => total + entrada.costo, 0);
 
+  const fechaCorte = fechaCorteUltimos12Meses();
+  const costoUltimos12Meses = bitacora
+    .filter((entrada) => entrada.fecha >= fechaCorte)
+    .reduce((total, entrada) => total + entrada.costo, 0);
+
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-4)" }}>
       <Link to="/catalogo" style={{ color: "var(--color-text-secondary)", fontSize: "var(--text-caption-size)" }}>
         ← Volver al catálogo
       </Link>
 
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "start" }}>
+      <div className="detail-header">
         <div>
           <h2 style={{ fontSize: "var(--text-headline-size)" }}>{original.nombre}</h2>
           <div style={{ color: "var(--color-text-secondary)" }}>{getGrupoNombre(original.grupoId)}</div>
-          <div style={{ fontSize: "var(--text-body-small-size)", color: "var(--color-text-secondary)", marginTop: "var(--space-1)" }}>
-            Costo total: <strong style={{ color: "var(--color-text-primary)" }}>${costoTotal.toLocaleString("es-MX")}</strong>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "var(--space-3)",
+              fontSize: "var(--text-body-small-size)",
+              color: "var(--color-text-secondary)",
+              marginTop: "var(--space-1)",
+            }}
+          >
+            <span>
+              Costo total: <strong style={{ color: "var(--color-text-primary)" }}>${costoTotal.toLocaleString("es-MX")}</strong>
+            </span>
+            <span>
+              Últimos 12 meses:{" "}
+              <strong style={{ color: "var(--color-text-primary)" }}>${costoUltimos12Meses.toLocaleString("es-MX")}</strong>
+            </span>
           </div>
         </div>
 
