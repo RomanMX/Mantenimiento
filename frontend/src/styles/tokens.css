@@ -1,0 +1,78 @@
+/* Design tokens from minidash-DESIGN.md */
+:root {
+  /* Colors */
+  --color-primary: #6366f1;
+  --color-primary-hover: #4f46e5;
+  --color-secondary: #14b8a6;
+  --color-tertiary: #f59e0b;
+  --color-background: #f3f4f6;
+  --color-surface: #ffffff;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-error-hover: #dc2626;
+  --color-info: #6366f1;
+
+  --color-text-primary: #111827;
+  --color-text-secondary: #6b7280;
+  --color-text-tertiary: #9ca3af;
+
+  --color-border: #e5e7eb;
+  --color-border-strong: #d1d5db;
+  --color-border-hover: #9ca3af;
+
+  --color-primary-tint: #eef2ff;
+  --color-error-tint: #fef2f2;
+
+  /* Typography */
+  --font-headline: "Inter", system-ui, sans-serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --text-display-size: 28px;
+  --text-display-line: 34px;
+  --text-headline-size: 22px;
+  --text-headline-line: 28px;
+  --text-subhead-size: 17px;
+  --text-subhead-line: 24px;
+  --text-body-large-size: 15px;
+  --text-body-large-line: 22px;
+  --text-body-size: 13px;
+  --text-body-line: 20px;
+  --text-body-small-size: 12px;
+  --text-body-small-line: 18px;
+  --text-caption-size: 11px;
+  --text-caption-line: 16px;
+  --text-overline-size: 10px;
+  --text-overline-line: 14px;
+
+  /* Spacing (base unit 4px) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* Radius */
+  --radius-none: 0px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* Elevation */
+  --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-medium: 0 2px 6px rgba(0, 0, 0, 0.06);
+  --shadow-large: 0 6px 16px rgba(0, 0, 0, 0.1);
+  --shadow-overlay: 0 12px 32px rgba(0, 0, 0, 0.14);
+
+  /* Semantic: estatus semáforo */
+  --color-semaforo-verde: var(--color-success);
+  --color-semaforo-amarillo: var(--color-warning);
+  --color-semaforo-rojo: var(--color-error);
+}

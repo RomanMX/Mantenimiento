@@ -55,33 +55,3 @@ El portal debe contar con un buscador de elementos que permita ubicarlos rápida
 | **Comité de Vigilancia** | Consultas y generación de entradas de comentarios sobre los elementos de mantenimiento. |
 | **Personal Sitio** | Registro de comentarios y cambio de estatus de los elementos de mantenimiento. |
 | **Administración Edificio** | Registro de comentarios y cambio de estatus de los elementos de mantenimiento. |
-
-## 5. Diseño de Interfaz
-
-El diseño visual del portal seguirá el sistema de diseño **MiniDash** (compacto, estilo dashboard/widgets), definido en [`minidash-DESIGN.md`](./minidash-DESIGN.md): paleta índigo-teal-ámbar, tipografía Inter/DM Sans, grid de widgets de 2 columnas y componentes (tarjetas, chips de estatus, botones, inputs) orientados a mostrar información densa y escaneable — útil para representar el estatus tipo semáforo de cada elemento.
-
-## 6. Arquitectura Técnica Propuesta
-
-- **Frontend**: React
-- **Backend**: Node.js
-- **Infraestructura**: AWS (arquitectura serverless — API Gateway + Lambda)
-- **Base de datos**: DynamoDB
-- **Autenticación**: Amazon Cognito (User Pools), con inicio de sesión por usuario/contraseña y por cuenta de Google (proveedor federado)
-
-## 7. Estructura del Repositorio Propuesta
-
-Monorepo con tres componentes principales:
-
-```
-/frontend   → Aplicación React (SPA)
-/backend    → Funciones Lambda (Node.js) y lógica de negocio/API
-/infra      → Infraestructura como código con AWS CDK (TypeScript)
-```
-
-- **frontend/**: SPA en React que consume la API a través de API Gateway.
-- **backend/**: código de las funciones Lambda que implementan la lógica de la bitácora de mantenimiento (alta/consulta de elementos y actividades).
-- **infra/**: definición de la infraestructura AWS (API Gateway, Lambda, DynamoDB, Cognito) usando AWS CDK en TypeScript.
-
-## 8. Estado del Proyecto
-
-En definición inicial. Aún no hay código implementado.
