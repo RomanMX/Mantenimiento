@@ -4,7 +4,7 @@ import { getElementoById, getGrupoNombre } from "../data/mockData";
 import type { BitacoraEntry, EstatusSemaforo } from "../types";
 import { SemaforoBadge } from "../components/SemaforoBadge";
 import { BitacoraList } from "../components/BitacoraList";
-import { CommentForm } from "../components/CommentForm";
+import { BitacoraEntryForm, type NuevaEntradaInput } from "../components/BitacoraEntryForm";
 import { useRole } from "../context/RoleContext";
 
 const ESTATUS_OPCIONES: EstatusSemaforo[] = ["VERDE", "AMARILLO", "ROJO"];
@@ -26,14 +26,11 @@ export function ElementoDetailPage() {
     );
   }
 
-  function agregarComentario(comentario: string) {
+  function agregarEntrada(input: NuevaEntradaInput) {
     const nuevaEntrada: BitacoraEntry = {
       id: `${Date.now()}`,
       fecha: new Date().toISOString().slice(0, 10),
-      actividad: "Comentario",
-      proveedor: "",
-      costo: 0,
-      comentarios: comentario,
+      ...input,
     };
     setBitacora((prev) => [nuevaEntrada, ...prev]);
   }
@@ -78,8 +75,8 @@ export function ElementoDetailPage() {
 
       {canComment && (
         <section>
-          <h3 style={{ fontSize: "var(--text-subhead-size)", marginBottom: "var(--space-3)" }}>Agregar comentario</h3>
-          <CommentForm onSubmit={agregarComentario} />
+          <h3 style={{ fontSize: "var(--text-subhead-size)", marginBottom: "var(--space-3)" }}>Registrar actividad</h3>
+          <BitacoraEntryForm onSubmit={agregarEntrada} />
         </section>
       )}
     </div>
