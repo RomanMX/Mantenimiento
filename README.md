@@ -28,6 +28,10 @@ Para cada elemento individual se debe poder registrar y consultar su bitácora h
 - Costo
 - Comentarios
 
+La "Actividad realizada" se selecciona de un catálogo fijo de tipos (ver [`MD/tipos-actividad.md`](./MD/tipos-actividad.md)), cada uno identificable mediante un ícono distintivo: REPORTE DE FALLA, MANTENIMIENTO PREVENTIVO, MANTENIMIENTO CORRECTIVO, REPORTE GENERAL y PAGO SERVICIO.
+
+Para cada elemento también se debe poder consultar el costo total acumulado y el costo de los últimos 12 meses, con base en las entradas de su bitácora.
+
 ### 3.3 Estatus tipo semáforo
 
 Cada elemento individual cuenta con un estatus tipo semáforo que indica su condición actual:
@@ -41,6 +45,7 @@ Cada elemento individual cuenta con un estatus tipo semáforo que indica su cond
 Al ingresar al portal, la pantalla inicial debe mostrar:
 
 - Los elementos con estatus de semáforo en **ROJO**.
+- El costo acumulado de los últimos 12 meses, agrupado por cada grupo de elementos (rampas, elevadores, bombas, etc.).
 - Las últimas entradas registradas en la bitácora, de cualquier elemento.
 
 ### 3.5 Buscador de elementos
@@ -52,6 +57,6 @@ El portal debe contar con un buscador de elementos que permita ubicarlos rápida
 | Rol | Permisos |
 |---|---|
 | **Administrador de Portal** | Acceso a los catálogos, alta y baja de usuarios, y temas propios de gestión de la plataforma. |
-| **Comité de Vigilancia** | Consultas y generación de entradas de comentarios sobre los elementos de mantenimiento. |
+| **Comité de Vigilancia** | Consultas, generación de entradas de comentarios y edición de entradas de bitácora ya registradas sobre los elementos de mantenimiento. |
 | **Personal Sitio** | Registro de comentarios y cambio de estatus de los elementos de mantenimiento. |
 | **Administración Edificio** | Registro de comentarios y cambio de estatus de los elementos de mantenimiento. |

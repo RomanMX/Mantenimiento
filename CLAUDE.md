@@ -5,7 +5,7 @@ Contexto técnico y seguimiento del proyecto **Mantenimiento**, para retomar el 
 ## Organización de la documentación
 
 - **[`README.md`](./README.md)**: definiciones de negocio y operación (propuesta, alcance funcional, roles). No debe contener detalle técnico.
-- **[`MD/`](./MD)**: specs detalladas por función/feature del sistema (ej. catálogo de elementos). Aquí se agregan los archivos conforme se van definiendo o construyendo nuevas funciones.
+- **[`MD/`](./MD)**: specs detalladas por función/feature del sistema (ej. catálogo de elementos, tipos de actividad). Aquí se agregan los archivos conforme se van definiendo o construyendo nuevas funciones.
 - **[`minidash-DESIGN.md`](./minidash-DESIGN.md)**: sistema de diseño visual (MiniDash) que sigue el portal.
 - **`CLAUDE.md`** (este archivo): contexto técnico, arquitectura y seguimiento del estado del proyecto.
 
@@ -40,7 +40,14 @@ El portal sigue el sistema de diseño **MiniDash** (compacto, estilo dashboard/w
 - [x] Sistema de diseño definido (`minidash-DESIGN.md`)
 - [x] Catálogo inicial de elementos, plantilla de ejemplo (`MD/catalogo-elementos.md`)
 - [x] Estructura de carpetas del monorepo (`frontend/`, `backend/`, `infra/`)
-- [x] Scaffold del frontend con datos mock (React + Vite + TS, tokens de MiniDash): dashboard inicial (elementos en ROJO + últimas entradas), catálogo con buscador, detalle de elemento (bitácora, estatus, comentarios en memoria) y selector de rol activo
+- [x] Catálogo de tipos de actividad, con ícono por tipo (`MD/tipos-actividad.md`)
+- [x] Scaffold del frontend con datos mock (React + Vite + TS, tokens de MiniDash):
+  - Dashboard inicial: elementos en ROJO, costo por grupo (últimos 12 meses) y últimas entradas de bitácora
+  - Catálogo con buscador y categorías colapsables
+  - Detalle de elemento: bitácora histórica, estatus semáforo, costo total y de últimos 12 meses, registro de actividad (catálogo fijo + proveedor/costo/comentarios)
+  - Edición de entradas de bitácora ya registradas (rol Comité de Vigilancia)
+  - Selector de rol activo con permisos condicionados por rol
+  - Layout responsivo (mobile-first breakpoint <600px), verificado sin overflow horizontal
 - [ ] Backend: Lambdas Node.js para catálogo y bitácora de mantenimiento
 - [ ] Infraestructura AWS (CDK): DynamoDB, API Gateway, Cognito
 - [ ] Autenticación real (Cognito) y permisos por rol conectados al backend

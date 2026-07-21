@@ -21,3 +21,4 @@ Plantilla de ejemplo con la estructura de grupos y elementos individuales descri
 - Todo elemento nuevo inicia con estatus **VERDE** salvo que se indique lo contrario al darlo de alta.
 - El Administrador de Portal es el rol responsable de mantener este catálogo (alta, baja y edición de grupos/elementos).
 - Este catálogo es la base para poblar los datos iniciales del sistema (por ejemplo, como seed de DynamoDB en `infra/`).
+- Ver también [`MD/tipos-actividad.md`](./tipos-actividad.md) para el catálogo de tipos de actividad que se registran en la bitácora de cada elemento.
