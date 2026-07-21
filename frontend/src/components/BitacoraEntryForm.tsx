@@ -1,7 +1,9 @@
 import { useState, type FormEvent } from "react";
+import { TIPOS_ACTIVIDAD, type TipoActividad } from "../types";
+import { ActividadIcon } from "./ActividadIcon";
 
 export interface NuevaEntradaInput {
-  actividad: string;
+  actividad: TipoActividad;
   proveedor: string;
   costo: number;
   comentarios: string;
@@ -9,40 +11,55 @@ export interface NuevaEntradaInput {
 
 interface BitacoraEntryFormProps {
   onSubmit: (entrada: NuevaEntradaInput) => void;
+  initial?: NuevaEntradaInput;
+  submitLabel?: string;
+  onCancel?: () => void;
 }
 
-export function BitacoraEntryForm({ onSubmit }: BitacoraEntryFormProps) {
-  const [actividad, setActividad] = useState("");
-  const [proveedor, setProveedor] = useState("");
-  const [costo, setCosto] = useState("");
-  const [comentarios, setComentarios] = useState("");
+export function BitacoraEntryForm({ onSubmit, initial, submitLabel = "Registrar actividad", onCancel }: BitacoraEntryFormProps) {
+  const [actividad, setActividad] = useState<TipoActividad>(initial?.actividad ?? TIPOS_ACTIVIDAD[0]);
+  const [proveedor, setProveedor] = useState(initial?.proveedor ?? "");
+  const [costo, setCosto] = useState(initial ? String(initial.costo) : "");
+  const [comentarios, setComentarios] = useState(initial?.comentarios ?? "");
+  const isEdit = Boolean(initial);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    const trimmed = actividad.trim();
-    if (!trimmed) return;
     onSubmit({
-      actividad: trimmed,
+      actividad,
       proveedor: proveedor.trim(),
       costo: Number(costo) || 0,
       comentarios: comentarios.trim(),
     });
-    setActividad("");
-    setProveedor("");
-    setCosto("");
-    setComentarios("");
+    if (!isEdit) {
+      setActividad(TIPOS_ACTIVIDAD[0]);
+      setProveedor("");
+      setCosto("");
+      setComentarios("");
+    }
   }
 
   return (
     <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
       <div style={{ display: "grid", gridTemplateColumns: "2fr 2fr 1fr", gap: "var(--space-2)" }}>
-        <input
-          className="input"
-          value={actividad}
-          onChange={(e) => setActividad(e.target.value)}
-          placeholder="Actividad realizada"
-          aria-label="Actividad realizada"
-        />
+        <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
+          <span style={{ position: "absolute", left: 10, pointerEvents: "none" }}>
+            <ActividadIcon tipo={actividad} />
+          </span>
+          <select
+            className="input"
+            style={{ paddingLeft: 32 }}
+            value={actividad}
+            onChange={(e) => setActividad(e.target.value as TipoActividad)}
+            aria-label="Actividad realizada"
+          >
+            {TIPOS_ACTIVIDAD.map((tipo) => (
+              <option key={tipo} value={tipo}>
+                {tipo}
+              </option>
+            ))}
+          </select>
+        </div>
         <input
           className="input"
           value={proveedor}
@@ -61,16 +78,24 @@ export function BitacoraEntryForm({ onSubmit }: BitacoraEntryFormProps) {
           aria-label="Costo"
         />
       </div>
-      <input
-        className="input"
+      <textarea
+        className="input textarea"
         value={comentarios}
         onChange={(e) => setComentarios(e.target.value)}
         placeholder="Comentarios"
         aria-label="Comentarios"
+        rows={3}
       />
-      <button type="submit" className="btn btn-primary" disabled={!actividad.trim()} style={{ alignSelf: "flex-start" }}>
-        Registrar actividad
-      </button>
+      <div style={{ display: "flex", gap: "var(--space-2)" }}>
+        <button type="submit" className="btn btn-primary" style={{ alignSelf: "flex-start" }}>
+          {submitLabel}
+        </button>
+        {onCancel && (
+          <button type="button" className="btn btn-ghost" onClick={onCancel}>
+            Cancelar
+          </button>
+        )}
+      </div>
     </form>
   );
 }

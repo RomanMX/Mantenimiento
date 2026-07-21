@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { getElementosEnRojo, getUltimasEntradas } from "../data/mockData";
 import { ElementCard } from "../components/ElementCard";
+import { ActividadIcon } from "../components/ActividadIcon";
 
 export function DashboardPage() {
   const enRojo = getElementosEnRojo();
@@ -36,7 +37,18 @@ export function DashboardPage() {
                 </Link>
                 <span style={{ color: "var(--color-text-secondary)", fontSize: "var(--text-caption-size)" }}>{entrada.fecha}</span>
               </div>
-              <div style={{ fontSize: "var(--text-body-small-size)", color: "var(--color-text-secondary)" }}>{entrada.actividad}</div>
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "var(--space-1)",
+                  fontSize: "var(--text-body-small-size)",
+                  color: "var(--color-text-secondary)",
+                }}
+              >
+                <ActividadIcon tipo={entrada.actividad} />
+                {entrada.actividad}
+              </div>
             </li>
           ))}
         </ul>

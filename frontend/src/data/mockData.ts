@@ -22,10 +22,10 @@ export const elementos: Elemento[] = [
     bitacora: bitacora([
       {
         fecha: "2026-05-12",
-        actividad: "Lubricación de mecanismo",
+        actividad: "MANTENIMIENTO PREVENTIVO",
         proveedor: "Portones y Rampas del Valle",
         costo: 1200,
-        comentarios: "Funcionamiento correcto tras servicio.",
+        comentarios: "Lubricación de mecanismo. Funcionamiento correcto tras servicio.",
       },
     ]),
   },
@@ -37,10 +37,10 @@ export const elementos: Elemento[] = [
     bitacora: bitacora([
       {
         fecha: "2026-04-02",
-        actividad: "Revisión de sensores",
+        actividad: "MANTENIMIENTO PREVENTIVO",
         proveedor: "Portones y Rampas del Valle",
         costo: 800,
-        comentarios: "Sin novedades.",
+        comentarios: "Revisión de sensores. Sin novedades.",
       },
     ]),
   },
@@ -52,10 +52,10 @@ export const elementos: Elemento[] = [
     bitacora: bitacora([
       {
         fecha: "2026-06-20",
-        actividad: "Mantenimiento preventivo mensual",
+        actividad: "MANTENIMIENTO PREVENTIVO",
         proveedor: "Otis Elevadores",
         costo: 3500,
-        comentarios: "Todo en orden.",
+        comentarios: "Mantenimiento preventivo mensual. Todo en orden.",
       },
     ]),
   },
@@ -67,17 +67,17 @@ export const elementos: Elemento[] = [
     bitacora: bitacora([
       {
         fecha: "2026-07-18",
-        actividad: "Falla en puerta de cabina",
+        actividad: "REPORTE DE FALLA",
         proveedor: "Otis Elevadores",
         costo: 0,
-        comentarios: "Elevador fuera de servicio, en espera de refacción.",
+        comentarios: "Falla en puerta de cabina. Elevador fuera de servicio, en espera de refacción.",
       },
       {
         fecha: "2026-07-01",
-        actividad: "Mantenimiento preventivo mensual",
+        actividad: "MANTENIMIENTO PREVENTIVO",
         proveedor: "Otis Elevadores",
         costo: 3500,
-        comentarios: "Se detectó desgaste en riel de puerta.",
+        comentarios: "Mantenimiento preventivo mensual. Se detectó desgaste en riel de puerta.",
       },
     ]),
   },
@@ -89,10 +89,10 @@ export const elementos: Elemento[] = [
     bitacora: bitacora([
       {
         fecha: "2026-07-15",
-        actividad: "Revisión de presión y ruido anómalo",
+        actividad: "REPORTE DE FALLA",
         proveedor: "Hidráulica Del Norte",
         costo: 950,
-        comentarios: "Se recomienda cambio de sello en próximas 4 semanas.",
+        comentarios: "Revisión de presión y ruido anómalo. Se recomienda cambio de sello en próximas 4 semanas.",
       },
     ]),
   },
@@ -104,10 +104,10 @@ export const elementos: Elemento[] = [
     bitacora: bitacora([
       {
         fecha: "2026-03-10",
-        actividad: "Ajuste de motor",
+        actividad: "MANTENIMIENTO CORRECTIVO",
         proveedor: "Portones y Rampas del Valle",
         costo: 600,
-        comentarios: "Operación normal.",
+        comentarios: "Ajuste de motor. Operación normal.",
       },
     ]),
   },
@@ -126,10 +126,10 @@ export const elementos: Elemento[] = [
     bitacora: bitacora([
       {
         fecha: "2026-06-05",
-        actividad: "Cambio de foco LED",
+        actividad: "MANTENIMIENTO CORRECTIVO",
         proveedor: "Eléctrica Sáenz",
         costo: 150,
-        comentarios: "",
+        comentarios: "Cambio de foco LED.",
       },
     ]),
   },
@@ -155,10 +155,10 @@ export const elementos: Elemento[] = [
     bitacora: bitacora([
       {
         fecha: "2026-07-19",
-        actividad: "Reporte de falla total",
+        actividad: "REPORTE DE FALLA",
         proveedor: "Eléctrica Sáenz",
         costo: 0,
-        comentarios: "Pasillo sin iluminación, se solicitó visita urgente.",
+        comentarios: "Reporte de falla total. Pasillo sin iluminación, se solicitó visita urgente.",
       },
     ]),
   },

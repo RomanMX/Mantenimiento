@@ -6,10 +6,25 @@ export type Rol =
   | "Personal Sitio"
   | "Administración Edificio";
 
+export type TipoActividad =
+  | "REPORTE DE FALLA"
+  | "MANTENIMIENTO PREVENTIVO"
+  | "MANTENIMIENTO CORRECTIVO"
+  | "REPORTE GENERAL"
+  | "PAGO SERVICIO";
+
+export const TIPOS_ACTIVIDAD: TipoActividad[] = [
+  "REPORTE DE FALLA",
+  "MANTENIMIENTO PREVENTIVO",
+  "MANTENIMIENTO CORRECTIVO",
+  "REPORTE GENERAL",
+  "PAGO SERVICIO",
+];
+
 export interface BitacoraEntry {
   id: string;
   fecha: string;
-  actividad: string;
+  actividad: TipoActividad;
   proveedor: string;
   costo: number;
   comentarios: string;

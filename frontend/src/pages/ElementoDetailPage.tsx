@@ -12,7 +12,7 @@ const ESTATUS_OPCIONES: EstatusSemaforo[] = ["VERDE", "AMARILLO", "ROJO"];
 export function ElementoDetailPage() {
   const { id } = useParams<{ id: string }>();
   const original = id ? getElementoById(id) : undefined;
-  const { canComment, canChangeEstatus } = useRole();
+  const { canComment, canChangeEstatus, canEditEntries } = useRole();
 
   const [estatus, setEstatus] = useState<EstatusSemaforo | undefined>(original?.estatus);
   const [bitacora, setBitacora] = useState<BitacoraEntry[]>(original?.bitacora ?? []);
@@ -35,6 +35,12 @@ export function ElementoDetailPage() {
     setBitacora((prev) => [nuevaEntrada, ...prev]);
   }
 
+  function editarEntrada(id: string, input: NuevaEntradaInput) {
+    setBitacora((prev) => prev.map((entrada) => (entrada.id === id ? { ...entrada, ...input } : entrada)));
+  }
+
+  const costoTotal = bitacora.reduce((total, entrada) => total + entrada.costo, 0);
+
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-4)" }}>
       <Link to="/catalogo" style={{ color: "var(--color-text-secondary)", fontSize: "var(--text-caption-size)" }}>
@@ -45,6 +51,9 @@ export function ElementoDetailPage() {
         <div>
           <h2 style={{ fontSize: "var(--text-headline-size)" }}>{original.nombre}</h2>
           <div style={{ color: "var(--color-text-secondary)" }}>{getGrupoNombre(original.grupoId)}</div>
+          <div style={{ fontSize: "var(--text-body-small-size)", color: "var(--color-text-secondary)", marginTop: "var(--space-1)" }}>
+            Costo total: <strong style={{ color: "var(--color-text-primary)" }}>${costoTotal.toLocaleString("es-MX")}</strong>
+          </div>
         </div>
 
         {canChangeEstatus ? (
@@ -70,7 +79,7 @@ export function ElementoDetailPage() {
 
       <section>
         <h3 style={{ fontSize: "var(--text-subhead-size)", marginBottom: "var(--space-3)" }}>Bitácora histórica</h3>
-        <BitacoraList entradas={bitacora} />
+        <BitacoraList entradas={bitacora} editable={canEditEntries} onEdit={editarEntrada} />
       </section>
 
       {canComment && (
