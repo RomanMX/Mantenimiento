@@ -12,7 +12,7 @@ const ESTATUS_OPCIONES: EstatusSemaforo[] = ["VERDE", "AMARILLO", "ROJO"];
 export function ElementoDetailPage() {
   const { id } = useParams<{ id: string }>();
   const original = id ? getElementoById(id) : undefined;
-  const { canComment, canChangeEstatus, canEditEntries } = useRole();
+  const { rol, canComment, canChangeEstatus, canEditEntries } = useRole();
 
   const [estatus, setEstatus] = useState<EstatusSemaforo | undefined>(original?.estatus);
   const [bitacora, setBitacora] = useState<BitacoraEntry[]>(original?.bitacora ?? []);
@@ -29,7 +29,8 @@ export function ElementoDetailPage() {
   function agregarEntrada(input: NuevaEntradaInput) {
     const nuevaEntrada: BitacoraEntry = {
       id: `${Date.now()}`,
-      fecha: new Date().toISOString().slice(0, 10),
+      fechaRegistro: new Date().toISOString(),
+      usuarioRegistro: rol,
       ...input,
     };
     setBitacora((prev) => [nuevaEntrada, ...prev]);
@@ -43,7 +44,7 @@ export function ElementoDetailPage() {
 
   const fechaCorte = fechaCorteUltimos12Meses();
   const costoUltimos12Meses = bitacora
-    .filter((entrada) => entrada.fecha >= fechaCorte)
+    .filter((entrada) => entrada.fechaActividad >= fechaCorte)
     .reduce((total, entrada) => total + entrada.costo, 0);
 
   return (

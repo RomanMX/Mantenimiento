@@ -35,7 +35,7 @@ export function ElementCard({ elemento }: { elemento: Elemento }) {
           }}
         >
           <ActividadIcon tipo={ultima.actividad} />
-          {ultima.actividad} ({ultima.fecha})
+          {ultima.actividad} ({ultima.fechaActividad})
         </div>
       )}
     </Link>

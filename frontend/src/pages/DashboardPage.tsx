@@ -52,7 +52,7 @@ export function DashboardPage() {
                 <Link to={`/elementos/${elemento.id}`} style={{ fontWeight: 600, color: "var(--color-primary)", textDecoration: "none" }}>
                   {elemento.nombre}
                 </Link>
-                <span style={{ color: "var(--color-text-secondary)", fontSize: "var(--text-caption-size)" }}>{entrada.fecha}</span>
+                <span style={{ color: "var(--color-text-secondary)", fontSize: "var(--text-caption-size)" }}>{entrada.fechaActividad}</span>
               </div>
               <div
                 style={{
@@ -65,6 +65,9 @@ export function DashboardPage() {
               >
                 <ActividadIcon tipo={entrada.actividad} />
                 {entrada.actividad}
+              </div>
+              <div style={{ fontSize: "var(--text-caption-size)", color: "var(--color-text-secondary)", marginTop: "var(--space-1)" }}>
+                Registrado por: {entrada.usuarioRegistro}
               </div>
             </li>
           ))}

@@ -3,6 +3,7 @@ import { TIPOS_ACTIVIDAD, type TipoActividad } from "../types";
 import { ActividadIcon } from "./ActividadIcon";
 
 export interface NuevaEntradaInput {
+  fechaActividad: string;
   actividad: TipoActividad;
   proveedor: string;
   costo: number;
@@ -16,7 +17,12 @@ interface BitacoraEntryFormProps {
   onCancel?: () => void;
 }
 
+function hoy(): string {
+  return new Date().toISOString().slice(0, 10);
+}
+
 export function BitacoraEntryForm({ onSubmit, initial, submitLabel = "Registrar actividad", onCancel }: BitacoraEntryFormProps) {
+  const [fechaActividad, setFechaActividad] = useState(initial?.fechaActividad ?? hoy());
   const [actividad, setActividad] = useState<TipoActividad>(initial?.actividad ?? TIPOS_ACTIVIDAD[0]);
   const [proveedor, setProveedor] = useState(initial?.proveedor ?? "");
   const [costo, setCosto] = useState(initial ? String(initial.costo) : "");
@@ -26,12 +32,14 @@ export function BitacoraEntryForm({ onSubmit, initial, submitLabel = "Registrar 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     onSubmit({
+      fechaActividad,
       actividad,
       proveedor: proveedor.trim(),
       costo: Number(costo) || 0,
       comentarios: comentarios.trim(),
     });
     if (!isEdit) {
+      setFechaActividad(hoy());
       setActividad(TIPOS_ACTIVIDAD[0]);
       setProveedor("");
       setCosto("");
@@ -42,6 +50,13 @@ export function BitacoraEntryForm({ onSubmit, initial, submitLabel = "Registrar 
   return (
     <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
       <div className="entry-form-grid">
+        <input
+          className="input"
+          type="date"
+          value={fechaActividad}
+          onChange={(e) => setFechaActividad(e.target.value)}
+          aria-label="Fecha de la actividad"
+        />
         <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
           <span style={{ position: "absolute", left: 10, pointerEvents: "none" }}>
             <ActividadIcon tipo={actividad} />

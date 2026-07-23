@@ -23,7 +23,9 @@ export const TIPOS_ACTIVIDAD: TipoActividad[] = [
 
 export interface BitacoraEntry {
   id: string;
-  fecha: string;
+  fechaActividad: string;
+  fechaRegistro: string;
+  usuarioRegistro: string;
   actividad: TipoActividad;
   proveedor: string;
   costo: number;

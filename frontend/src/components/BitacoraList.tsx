@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { BitacoraEntry } from "../types";
 import { ActividadIcon } from "./ActividadIcon";
 import { BitacoraEntryForm, type NuevaEntradaInput } from "./BitacoraEntryForm";
+import { useRole } from "../context/RoleContext";
 
 interface BitacoraListProps {
   entradas: BitacoraEntry[];
@@ -11,6 +12,8 @@ interface BitacoraListProps {
 
 export function BitacoraList({ entradas, editable = false, onEdit }: BitacoraListProps) {
   const [editingId, setEditingId] = useState<string | null>(null);
+  const { rol } = useRole();
+  const puedeVerFechaRegistro = rol === "Administrador de Portal";
 
   if (entradas.length === 0) {
     return (
@@ -27,6 +30,7 @@ export function BitacoraList({ entradas, editable = false, onEdit }: BitacoraLis
           {editingId === entrada.id ? (
             <BitacoraEntryForm
               initial={{
+                fechaActividad: entrada.fechaActividad,
                 actividad: entrada.actividad,
                 proveedor: entrada.proveedor,
                 costo: entrada.costo,
@@ -48,7 +52,7 @@ export function BitacoraList({ entradas, editable = false, onEdit }: BitacoraLis
                 </span>
                 <span style={{ display: "inline-flex", alignItems: "center", gap: "var(--space-2)" }}>
                   <span style={{ color: "var(--color-text-secondary)", fontWeight: 400, fontSize: "var(--text-caption-size)" }}>
-                    {entrada.fecha}
+                    {entrada.fechaActividad}
                   </span>
                   {editable && (
                     <button
@@ -64,6 +68,10 @@ export function BitacoraList({ entradas, editable = false, onEdit }: BitacoraLis
               </div>
               <div style={{ fontSize: "var(--text-body-small-size)", color: "var(--color-text-secondary)", marginTop: "var(--space-1)" }}>
                 Proveedor: {entrada.proveedor || "—"} · Costo: ${entrada.costo.toLocaleString("es-MX")}
+              </div>
+              <div style={{ fontSize: "var(--text-caption-size)", color: "var(--color-text-secondary)", marginTop: "var(--space-1)" }}>
+                Registrado por: {entrada.usuarioRegistro}
+                {puedeVerFechaRegistro && ` · Fecha de registro: ${new Date(entrada.fechaRegistro).toLocaleString("es-MX")}`}
               </div>
               {entrada.comentarios && (
                 <div style={{ fontSize: "var(--text-body-small-size)", marginTop: "var(--space-1)", whiteSpace: "pre-wrap" }}>

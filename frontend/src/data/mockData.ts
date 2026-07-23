@@ -10,7 +10,7 @@ export const grupos: Grupo[] = [
 ];
 
 function bitacora(entries: Omit<BitacoraEntry, "id">[]): BitacoraEntry[] {
-  return entries.map((entry, index) => ({ id: `${entry.fecha}-${index}`, ...entry }));
+  return entries.map((entry, index) => ({ id: `${entry.fechaActividad}-${index}`, ...entry }));
 }
 
 export const elementos: Elemento[] = [
@@ -21,7 +21,9 @@ export const elementos: Elemento[] = [
     estatus: "VERDE",
     bitacora: bitacora([
       {
-        fecha: "2026-05-12",
+        fechaActividad: "2026-05-12",
+        fechaRegistro: "2026-05-12T09:00:00",
+        usuarioRegistro: "Administración Edificio",
         actividad: "MANTENIMIENTO PREVENTIVO",
         proveedor: "Portones y Rampas del Valle",
         costo: 1200,
@@ -36,7 +38,9 @@ export const elementos: Elemento[] = [
     estatus: "VERDE",
     bitacora: bitacora([
       {
-        fecha: "2026-04-02",
+        fechaActividad: "2026-04-02",
+        fechaRegistro: "2026-04-02T09:00:00",
+        usuarioRegistro: "Administración Edificio",
         actividad: "MANTENIMIENTO PREVENTIVO",
         proveedor: "Portones y Rampas del Valle",
         costo: 800,
@@ -51,7 +55,9 @@ export const elementos: Elemento[] = [
     estatus: "VERDE",
     bitacora: bitacora([
       {
-        fecha: "2026-06-20",
+        fechaActividad: "2026-06-20",
+        fechaRegistro: "2026-06-20T09:00:00",
+        usuarioRegistro: "Administración Edificio",
         actividad: "MANTENIMIENTO PREVENTIVO",
         proveedor: "Otis Elevadores",
         costo: 3500,
@@ -66,14 +72,18 @@ export const elementos: Elemento[] = [
     estatus: "ROJO",
     bitacora: bitacora([
       {
-        fecha: "2026-07-18",
+        fechaActividad: "2026-07-18",
+        fechaRegistro: "2026-07-18T09:00:00",
+        usuarioRegistro: "Administración Edificio",
         actividad: "REPORTE DE FALLA",
         proveedor: "Otis Elevadores",
         costo: 0,
         comentarios: "Falla en puerta de cabina. Elevador fuera de servicio, en espera de refacción.",
       },
       {
-        fecha: "2026-07-01",
+        fechaActividad: "2026-07-01",
+        fechaRegistro: "2026-07-01T09:00:00",
+        usuarioRegistro: "Administración Edificio",
         actividad: "MANTENIMIENTO PREVENTIVO",
         proveedor: "Otis Elevadores",
         costo: 3500,
@@ -88,7 +98,9 @@ export const elementos: Elemento[] = [
     estatus: "AMARILLO",
     bitacora: bitacora([
       {
-        fecha: "2026-07-15",
+        fechaActividad: "2026-07-15",
+        fechaRegistro: "2026-07-15T09:00:00",
+        usuarioRegistro: "Administración Edificio",
         actividad: "REPORTE DE FALLA",
         proveedor: "Hidráulica Del Norte",
         costo: 950,
@@ -103,7 +115,9 @@ export const elementos: Elemento[] = [
     estatus: "VERDE",
     bitacora: bitacora([
       {
-        fecha: "2026-03-10",
+        fechaActividad: "2026-03-10",
+        fechaRegistro: "2026-03-10T09:00:00",
+        usuarioRegistro: "Administración Edificio",
         actividad: "MANTENIMIENTO CORRECTIVO",
         proveedor: "Portones y Rampas del Valle",
         costo: 600,
@@ -125,7 +139,9 @@ export const elementos: Elemento[] = [
     estatus: "VERDE",
     bitacora: bitacora([
       {
-        fecha: "2026-06-05",
+        fechaActividad: "2026-06-05",
+        fechaRegistro: "2026-06-05T09:00:00",
+        usuarioRegistro: "Administración Edificio",
         actividad: "MANTENIMIENTO CORRECTIVO",
         proveedor: "Eléctrica Sáenz",
         costo: 150,
@@ -154,7 +170,9 @@ export const elementos: Elemento[] = [
     estatus: "ROJO",
     bitacora: bitacora([
       {
-        fecha: "2026-07-19",
+        fechaActividad: "2026-07-19",
+        fechaRegistro: "2026-07-19T09:00:00",
+        usuarioRegistro: "Administración Edificio",
         actividad: "REPORTE DE FALLA",
         proveedor: "Eléctrica Sáenz",
         costo: 0,
@@ -188,7 +206,7 @@ export interface UltimaEntrada {
 export function getUltimasEntradas(limit = 5): UltimaEntrada[] {
   return elementos
     .flatMap((elemento) => elemento.bitacora.map((entrada) => ({ elemento, entrada })))
-    .sort((a, b) => b.entrada.fecha.localeCompare(a.entrada.fecha))
+    .sort((a, b) => b.entrada.fechaActividad.localeCompare(a.entrada.fechaActividad))
     .slice(0, limit);
 }
 
@@ -209,7 +227,7 @@ export function getCostoPorGrupoUltimos12Meses(): CostoPorGrupo[] {
     grupo,
     costoUltimos12Meses: getElementosPorGrupo(grupo.id)
       .flatMap((elemento) => elemento.bitacora)
-      .filter((entrada) => entrada.fecha >= fechaCorte)
+      .filter((entrada) => entrada.fechaActividad >= fechaCorte)
       .reduce((total, entrada) => total + entrada.costo, 0),
   }));
 }
