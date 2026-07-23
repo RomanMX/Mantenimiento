@@ -41,6 +41,7 @@ El portal sigue el sistema de diseño **MiniDash** (compacto, estilo dashboard/w
 - [x] Catálogo inicial de elementos, plantilla de ejemplo (`MD/catalogo-elementos.md`)
 - [x] Estructura de carpetas del monorepo (`frontend/`, `backend/`, `infra/`)
 - [x] Catálogo de tipos de actividad, con ícono por tipo (`MD/tipos-actividad.md`)
+- [x] Especificación de autenticación y gestión de usuarios: login con Gmail o usuario/contraseña propio (alta solo por Administrador de Portal), cambio de contraseña para cuentas propias (`MD/usuarios-autenticacion.md`)
 - [x] Scaffold del frontend con datos mock (React + Vite + TS, tokens de MiniDash):
   - Dashboard inicial: elementos en ROJO, costo por grupo (últimos 12 meses) y últimas entradas de bitácora
   - Catálogo con buscador y categorías colapsables

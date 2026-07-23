@@ -60,3 +60,12 @@ El portal debe contar con un buscador de elementos que permita ubicarlos rápida
 | **Comité de Vigilancia** | Consultas, generación de entradas de comentarios y edición de entradas de bitácora ya registradas sobre los elementos de mantenimiento. |
 | **Personal Sitio** | Registro de comentarios y cambio de estatus de los elementos de mantenimiento. |
 | **Administración Edificio** | Registro de comentarios y cambio de estatus de los elementos de mantenimiento. |
+
+### 4.1 Inicio de sesión
+
+Los usuarios pueden ingresar al portal de dos formas:
+
+- Con su **cuenta de Gmail** (inicio de sesión federado con Google).
+- Con un **usuario y contraseña propios** del sistema, dados de alta únicamente por el rol **Administrador de Portal**. Los usuarios de este tipo pueden cambiar su contraseña desde su perfil.
+
+Ver detalle en [`MD/usuarios-autenticacion.md`](./MD/usuarios-autenticacion.md).
