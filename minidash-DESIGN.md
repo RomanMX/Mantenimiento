@@ -24,15 +24,15 @@ MiniDash is a widget-like, compact design system engineered for mobile dashboard
 - **Body Font**: DM Sans
 - **Mono Font**: IBM Plex Mono
 
-- **Display**: Inter 28px bold, 34px line height
-- **Headline**: Inter 22px bold, 28px line height
-- **Subhead**: Inter 17px semibold, 24px line height
-- **Body Large**: DM Sans 15px regular, 22px line height
-- **Body**: DM Sans 13px regular, 20px line height
-- **Body Small**: DM Sans 12px regular, 18px line height
-- **Caption**: DM Sans 11px medium, 16px line height
-- **Overline**: DM Sans 10px semibold, 14px line height
-- **Code**: IBM Plex Mono 12px regular, 18px line height
+- **Display**: Inter 30px bold, 36px line height
+- **Headline**: Inter 24px bold, 30px line height
+- **Subhead**: Inter 18px semibold, 26px line height
+- **Body Large**: DM Sans 16px regular, 24px line height
+- **Body**: DM Sans 14px regular, 21px line height
+- **Body Small**: DM Sans 13px regular, 19px line height
+- **Caption**: DM Sans 12px medium, 17px line height
+- **Overline**: DM Sans 11px semibold, 15px line height
+- **Code**: IBM Plex Mono 13px regular, 19px line height
 
 ---
 

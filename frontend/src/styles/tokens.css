@@ -29,22 +29,22 @@
   --font-body: "DM Sans", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
-  --text-display-size: 28px;
-  --text-display-line: 34px;
-  --text-headline-size: 22px;
-  --text-headline-line: 28px;
-  --text-subhead-size: 17px;
-  --text-subhead-line: 24px;
-  --text-body-large-size: 15px;
-  --text-body-large-line: 22px;
-  --text-body-size: 13px;
-  --text-body-line: 20px;
-  --text-body-small-size: 12px;
-  --text-body-small-line: 18px;
-  --text-caption-size: 11px;
-  --text-caption-line: 16px;
-  --text-overline-size: 10px;
-  --text-overline-line: 14px;
+  --text-display-size: 30px;
+  --text-display-line: 36px;
+  --text-headline-size: 24px;
+  --text-headline-line: 30px;
+  --text-subhead-size: 18px;
+  --text-subhead-line: 26px;
+  --text-body-large-size: 16px;
+  --text-body-large-line: 24px;
+  --text-body-size: 14px;
+  --text-body-line: 21px;
+  --text-body-small-size: 13px;
+  --text-body-small-line: 19px;
+  --text-caption-size: 12px;
+  --text-caption-line: 17px;
+  --text-overline-size: 11px;
+  --text-overline-line: 15px;
 
   /* Spacing (base unit 4px) */
   --space-1: 4px;
