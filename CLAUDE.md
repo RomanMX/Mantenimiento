@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Contexto técnico y seguimiento del proyecto **Mantenimiento**, para retomar el trabajo entre sesiones.
+Contexto técnico y seguimiento del proyecto **Calli** (sistema de mantenimiento de edificio), para retomar el trabajo entre sesiones.
 
 ## Organización de la documentación
 
@@ -30,9 +30,9 @@ El portal sigue el sistema de diseño **MiniDash** (compacto, estilo dashboard/w
 /MD         → Specs específicas por función/feature
 ```
 
-- **frontend/**: SPA en React que consume la API a través de API Gateway.
-- **backend/**: código de las funciones Lambda que implementan la lógica de la bitácora de mantenimiento (alta/consulta de elementos y actividades).
-- **infra/**: definición de la infraestructura AWS (API Gateway, Lambda, DynamoDB, Cognito) usando AWS CDK en TypeScript.
+- **frontend/**: SPA en React que hoy consume datos mock; falta conectarla a la API real.
+- **backend/**: funciones Lambda (Node.js/TypeScript) para catálogo (lectura) y bitácora de mantenimiento (alta/consulta/edición), sobre DynamoDB. Ver `backend/README.md`.
+- **infra/**: CDK (TypeScript) con las tablas DynamoDB. API Gateway/Lambda/Cognito aún no están definidos aquí. Ver `infra/README.md`.
 
 ## Estado del proyecto / Seguimiento
 
@@ -49,14 +49,18 @@ El portal sigue el sistema de diseño **MiniDash** (compacto, estilo dashboard/w
   - Edición de entradas de bitácora ya registradas (rol Comité de Vigilancia)
   - Selector de rol activo con permisos condicionados por rol
   - Layout responsivo (mobile-first breakpoint <600px), verificado sin overflow horizontal
-- [ ] Backend: Lambdas Node.js para catálogo y bitácora de mantenimiento
-- [ ] Infraestructura AWS (CDK): DynamoDB, API Gateway, Cognito
-- [ ] Autenticación real (Cognito) y permisos por rol conectados al backend
-- [ ] Persistencia real de comentarios y cambios de estatus (hoy solo viven en memoria en el frontend)
+- [x] Infraestructura AWS (CDK): tablas DynamoDB `calli-elementos`/`calli-grupos` (`infra/lib/calli-stack.ts`) — código listo, **no desplegado** a la cuenta real todavía (`npm run deploy` en `infra/` es una acción explícita pendiente). API Gateway y Cognito aún no están definidos.
+- [x] Backend: Lambdas Node.js/TypeScript para catálogo (solo lectura) y bitácora de mantenimiento (alta/edición de entradas, cambio de estatus), con permisos por rol validados en servidor (`backend/src/`). Probado con `node --test` contra DynamoDB Local (Docker), 16/16 pruebas pasando. Alta/baja/edición del catálogo (grupos y elementos) queda pendiente para una siguiente etapa.
+- [ ] Conectar el frontend al backend real (hoy sigue leyendo de `frontend/src/data/mockData.ts`)
+- [ ] Desplegar `infra/` a AWS (`cdk deploy`) y las Lambdas de `backend/`
+- [ ] API Gateway (exponer las Lambdas como HTTP API) y Cognito (autenticación real, ver `MD/usuarios-autenticacion.md`) — permisos por rol en backend ya están listos para conectarse a los claims del JWT
+- [ ] Alta/baja/edición del catálogo (grupos y elementos) en el backend, rol Administrador de Portal
 - [ ] Carga del inventario real de elementos del edificio (hoy `MD/catalogo-elementos.md` es una plantilla genérica)
-- [ ] Tests automatizados
+- [ ] Tests automatizados del frontend (el backend ya tiene los suyos, ver `backend/README.md`)
 
 ## Notas del entorno de desarrollo
 
 - El frontend corre con datos mock; ver [`frontend/README.md`](./frontend/README.md) para los comandos de desarrollo.
-- En este entorno (WSL), `node`/`npm` no están en el `PATH` de WSL; se usa la instalación de Windows en `/mnt/c/Program Files/nodejs/`.
+- En este entorno (WSL), `node`/`npm` no están en el `PATH` de WSL; se usa la instalación de Windows en `/mnt/c/Program Files/nodejs/`. Al invocar esos binarios `.exe` desde bash de WSL, **las variables de entorno exportadas en bash no se pasan al proceso de Windows** (WSL no las reenvía salvo que estén en `WSLENV`); por eso `backend/package.json` usa `node --env-file=.env.test` en vez de `VAR=valor npm test`.
+- Docker está disponible pero el usuario de este shell no pertenece al grupo `docker` (permission denied en `/var/run/docker.sock`); comandos `docker run/ps/...` los tiene que correr el usuario directamente en su terminal (prefijo `!`), no Claude.
+- La CLI de AWS ya está configurada en este entorno con credenciales reales de una cuenta compartida (no solo de este proyecto — ya tiene otro proyecto desplegado). No correr `cdk deploy` ni ninguna acción que cree/modifique recursos reales sin confirmación explícita del usuario.
