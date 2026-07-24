@@ -49,11 +49,12 @@ El portal sigue el sistema de diseño **MiniDash** (compacto, estilo dashboard/w
   - Edición de entradas de bitácora ya registradas (rol Comité de Vigilancia)
   - Selector de rol activo con permisos condicionados por rol
   - Layout responsivo (mobile-first breakpoint <600px), verificado sin overflow horizontal
-- [x] Infraestructura AWS (CDK): tablas DynamoDB `calli-elementos`/`calli-grupos` (`infra/lib/calli-stack.ts`) — código listo, **no desplegado** a la cuenta real todavía (`npm run deploy` en `infra/` es una acción explícita pendiente). API Gateway y Cognito aún no están definidos.
+- [x] Infraestructura AWS (CDK): tablas DynamoDB `calli-elementos`/`calli-grupos` (`infra/lib/calli-stack.ts`) — **desplegadas** a la cuenta real (`CalliStack`, cuenta `681567442203`, `us-east-1`), vacías. API Gateway y Cognito aún no están definidos en `infra/`.
 - [x] Backend: Lambdas Node.js/TypeScript para catálogo (solo lectura) y bitácora de mantenimiento (alta/edición de entradas, cambio de estatus), con permisos por rol validados en servidor (`backend/src/`). Probado con `node --test` contra DynamoDB Local (Docker), 16/16 pruebas pasando. Alta/baja/edición del catálogo (grupos y elementos) queda pendiente para una siguiente etapa.
 - [ ] Conectar el frontend al backend real (hoy sigue leyendo de `frontend/src/data/mockData.ts`)
-- [ ] Desplegar `infra/` a AWS (`cdk deploy`) y las Lambdas de `backend/`
+- [ ] Desplegar las Lambdas de `backend/` (código listo, aún no definidas/desplegadas en `infra/`)
 - [ ] API Gateway (exponer las Lambdas como HTTP API) y Cognito (autenticación real, ver `MD/usuarios-autenticacion.md`) — permisos por rol en backend ya están listos para conectarse a los claims del JWT
+- [ ] `npm run seed` en `backend/` contra la tabla real (hoy vacía) para cargar el catálogo de ejemplo
 - [ ] Alta/baja/edición del catálogo (grupos y elementos) en el backend, rol Administrador de Portal
 - [ ] Carga del inventario real de elementos del edificio (hoy `MD/catalogo-elementos.md` es una plantilla genérica)
 - [ ] Tests automatizados del frontend (el backend ya tiene los suyos, ver `backend/README.md`)
